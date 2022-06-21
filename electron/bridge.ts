@@ -1,4 +1,5 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron';
+import { changeTimerInterval, initShellOnTimer } from '../src/childProcess';
 
 export const api = {
   /**
@@ -10,15 +11,23 @@ export const api = {
    */
 
   sendMessage: (message: string) => {
-    ipcRenderer.send('message', message)
+    ipcRenderer.send('message', message);
+  },
+
+  initShell: (callback: Function, interval?: number) => {
+    initShellOnTimer(callback, interval);
+  },
+
+  changeInterval: (callback: Function, interval: number) => {
+    changeTimerInterval(callback, interval);
   },
 
   /**
    * Provide an easier way to listen to events
    */
   on: (channel: string, callback: Function) => {
-    ipcRenderer.on(channel, (_, data) => callback(data))
-  }
-}
+    ipcRenderer.on(channel, (_, data) => callback(data));
+  },
+};
 
-contextBridge.exposeInMainWorld('Main', api)
+contextBridge.exposeInMainWorld('Main', api);

@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Lato&family=Roboto:wght@300;400&display=swap');
+
+//Components
+@import 'components/actionComponent';
+
+//Variables
+@import 'variables';
+
+* {
+  font-family: 'Heebo', sans-serif;
+}
+
+// Not really sure why this should be necessary...
+head {
+  display: none;
+}
+
+#mainWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown-menu {
+  padding: 5px !important;
+
+  li a {
+    border-radius: 5px;
+
+    &:active {
+      background-color: $accent-color-purple;
+    }
+  }
+}

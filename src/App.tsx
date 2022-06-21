@@ -1,12 +1,23 @@
-import { GlobalStyle } from './styles/GlobalStyle'
+import { ActionElement } from './components/Action';
 
-import { Greetings } from './components/Greetings'
+import './styles/css/index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export function App() {
+  window.Main.initShell(handleOutput, 10000);
+
+  function handleOutput(output: any) {}
+
   return (
-    <>
-      <GlobalStyle />
-      <Greetings />
-    </>
-  )
+    <div id="mainWrapper">
+      <ActionElement />
+    </div>
+  );
 }
+
+/**
+ * Colors:
+ * - background: #fcfcfc
+ * - slighly darker grey: #efefef
+ * - accent: #a898d7
+ */

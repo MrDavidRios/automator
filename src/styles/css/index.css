@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Lato&family=Roboto:wght@300;400&display=swap");
+.action {
+  display: flex; }
+
+* {
+  display: flex; }
+
+* {
+  font-family: 'Heebo', sans-serif; }
+
+head {
+  display: none; }
+
+#mainWrapper {
+  display: flex;
+  justify-content: center; }
+
+.dropdown-menu {
+  padding: 5px !important; }
+  .dropdown-menu li a {
+    border-radius: 5px; }
+    .dropdown-menu li a:active {
+      background-color: #a898d7; }

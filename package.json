@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-typescript",
-  "author": "Diego Fernandes <diego.schell.f@gmail.com>",
-  "version": "2.0.0",
-  "description": "An Electron boilerplate including TypeScript, React, Jest and ESLint.",
+  "name": "automator",
+  "author": "David Rios <mr.daverios@gmail.com>",
+  "version": "0.0.1",
+  "description": "",
   "main": "./.webpack/main/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -10,14 +10,18 @@
     "make": "electron-forge make",
     "release": "electron-forge publish",
     "lint": "eslint . --ext js,ts",
-    "test": "jest"
+    "test": "jest",
+    "sass": "node-sass -w src/styles/scss/ -o src/styles/css/ "
   },
   "keywords": [],
   "license": "MIT",
   "dependencies": {
+    "bootstrap": "^5.2.0-beta1",
+    "node-sass": "^7.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hot-loader": "4.13.0",
+    "style-loader": "^3.3.1",
     "styled-components": "5.3.0"
   },
   "devDependencies": {
@@ -37,14 +41,16 @@
     "@testing-library/react": "11.2.7",
     "@types/electron-devtools-installer": "2.2.0",
     "@types/jest": "26.0.23",
-    "@types/react": "17.0.11",
-    "@types/react-dom": "17.0.8",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
     "@types/styled-components": "5.1.10",
     "@typescript-eslint/eslint-plugin": "4.27.0",
     "@typescript-eslint/parser": "4.27.0",
     "babel-loader": "8.2.2",
     "cross-env": "7.0.3",
-    "electron": "13.1.2",
+    "css-loader": "^6.7.1",
+    "electron": "^19.0.4",
+    "electron-devtools-installer": "^3.2.0",
     "eslint": "7.29.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-standard": "16.0.3",
