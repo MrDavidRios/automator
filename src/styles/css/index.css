@@ -3,10 +3,10 @@
 .action {
   height: min-content;
   width: 100%;
-  display: grid;
-  grid-template-columns: min-content min-content min-content min-content auto min-content;
+  display: flex;
   align-items: center;
   gap: 10px;
+  position: relative;
   background-color: #fff;
   padding: 10px 10px 10px 15px;
   border-radius: 15px; }
@@ -14,11 +14,24 @@
     filter: invert(64%) sepia(0%) saturate(0%) hue-rotate(32deg) brightness(89%) contrast(90%);
     height: 30px; }
   .action .remove-action-btn {
-    margin-right: 12px; }
+    position: absolute;
+    right: 15px; }
     .action .remove-action-btn .delete {
       color: #f96c6c; }
       .action .remove-action-btn .delete:active {
         background-color: #e6e6e6; }
+
+.file-upload {
+  display: flex;
+  align-items: center; }
+  .file-upload input {
+    width: 110px;
+    min-width: 110px; }
+  .file-upload p {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
 
 * {
   font-family: 'Heebo', sans-serif;
@@ -35,6 +48,9 @@ body,
 #root {
   width: 100%;
   height: 100%; }
+
+input[type='file'] {
+  color: transparent; }
 
 #mainWrapper {
   width: 100%;

@@ -4,6 +4,13 @@ import { EventType, OperationType } from './ActionTypes';
 import ActionsDisplay from './components/ActionsDisplay';
 import { loadActions, saveActions } from './saveData';
 
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+);
+const tooltipList = [...tooltipTriggerList].map(
+  tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl)
+);
+
 export function App() {
   const loadedActions = loadActions();
 
@@ -27,7 +34,7 @@ export function App() {
   }
 
   function deleteAction(actionIdx: number) {
-    setActions(actions.filter((action, idx) => idx !== actionIdx));
+    setActions(actions.filter((_action, idx) => idx !== actionIdx));
   }
 
   useEffect(() => {
