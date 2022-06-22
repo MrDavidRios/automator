@@ -13,9 +13,11 @@ const FileUpload = ({ action, type, idx, updateAction, modifyAction }: { action:
     <div className="file-upload">
       <input
         type="file"
-        accept={requiresExe ? '.exe' : '*'}
+        accept={requiresExe ? '.exe, .js' : '*'}
         onChange={el => {
           if (requiresExe && fileExtension !== 'exe') {
+            console.log(el.target.files![0].path);
+
             const rejectedExtensionModal = new Modal(document.getElementById('rejectedExtensionModal') as Element);
             rejectedExtensionModal.toggle();
           } else {

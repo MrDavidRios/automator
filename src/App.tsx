@@ -4,13 +4,6 @@ import { EventType, OperationType } from './ActionTypes';
 import ActionsDisplay from './components/ActionsDisplay';
 import { loadActions, saveActions } from './saveData';
 
-const tooltipTriggerList = document.querySelectorAll(
-  '[data-bs-toggle="tooltip"]'
-);
-const tooltipList = [...tooltipTriggerList].map(
-  tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl)
-);
-
 export function App() {
   const loadedActions = loadActions();
 
@@ -27,10 +20,7 @@ export function App() {
   }
 
   function addAction() {
-    setActions([
-      ...actions,
-      new Action(EventType.OnStartup, OperationType.GoToLink),
-    ]);
+    setActions([...actions, new Action(EventType.OnStartup, OperationType.GoToLink)]);
   }
 
   function deleteAction(actionIdx: number) {
@@ -47,12 +37,7 @@ export function App() {
         <h1>Automator</h1>
       </header>
 
-      <ActionsDisplay
-        actions={actions}
-        addAction={addAction}
-        deleteAction={deleteAction}
-        modifyAction={modifyAction}
-      />
+      <ActionsDisplay actions={actions} addAction={addAction} deleteAction={deleteAction} modifyAction={modifyAction} />
     </div>
   );
 }

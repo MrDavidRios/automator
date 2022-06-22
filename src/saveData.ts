@@ -2,7 +2,7 @@ import { Action } from './Action';
 
 function getSaveFilePath(filename: string): string {
   const globals = global.location.search;
-  return `${globals.substring(globals.indexOf('C'))}\\${filename}`;
+  return `${globals.substring(globals.indexOf('=') + 1)}\\${filename}`;
 }
 
 export function saveActions(actions: Action[]) {
