@@ -62,11 +62,13 @@ body,
 
   border-radius: 20px;
   padding: 20px;
+  padding-right: 12px;
 
   > div:first-of-type {
     overflow-y: auto;
     height: 100%;
 
+    padding-right: 8px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -121,4 +123,21 @@ body,
       background-color: $accent-color-purple;
     }
   }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #afafaf;
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(196, 196, 196);
 }
