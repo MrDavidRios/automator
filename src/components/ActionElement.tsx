@@ -8,17 +8,7 @@ import FileUpload from './FileUpload';
 const events = ['Startup', 'App Open', 'App Close', 'App Focus'];
 const actions = ['Open App', 'Open File', 'Go to Link'];
 
-export const ActionElement = ({
-  idx,
-  action,
-  deleteAction,
-  modifyAction,
-}: {
-  idx: number;
-  action: Action;
-  deleteAction: Function;
-  modifyAction: Function;
-}) => {
+export const ActionElement = ({ idx, action, deleteAction, modifyAction }: { idx: number; action: Action; deleteAction: Function; modifyAction: Function }) => {
   const [_action, updateAction] = useState(action);
 
   let stateFinished = false;
@@ -30,8 +20,12 @@ export const ActionElement = ({
   function dropdownChanged(type: string, val: number) {
     if (type === 'operation') {
       _action.operation = val;
+
+      _action.operationFilePath = undefined;
     } else if (type === 'event') {
       _action.event = val;
+
+      _action.eventAppProcessName = undefined;
     }
 
     updateAction(_action);
@@ -40,15 +34,11 @@ export const ActionElement = ({
 
   const correctedAction = stateFinished ? _action : action;
 
-  console.log();
-
   return (
     <div className="action shadow-sm">
       <p>On</p>
       <Dropdown options={events} selected={correctedAction.event} type="event" callback={dropdownChanged} />
-      {correctedAction.event === EventType.OnAppOpen ||
-      correctedAction.event === EventType.OnAppClose ||
-      correctedAction.event === EventType.OnAppFocus ? (
+      {correctedAction.event === EventType.OnAppOpen || correctedAction.event === EventType.OnAppClose || correctedAction.event === EventType.OnAppFocus ? (
         <FileUpload action={correctedAction} type="event" idx={idx} updateAction={updateAction} modifyAction={modifyAction} />
       ) : null}
 
@@ -57,6 +47,7 @@ export const ActionElement = ({
       {correctedAction.operation === OperationType.OpenFile || correctedAction.operation === OperationType.OpenApp ? (
         <FileUpload action={correctedAction} type="operation" idx={idx} updateAction={updateAction} modifyAction={modifyAction} />
       ) : null}
+      {correctedAction.operation === OperationType.GoToLink ? <input className="form-control" id="urlInput" aria-describedby="emailHelp" placeholder="http://www.google.com" /> : null}
       <ContextMenuDropdown idx={idx} callback={deleteAction} />
     </div>
   );

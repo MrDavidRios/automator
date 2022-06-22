@@ -1,7 +1,5 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
-import installExtension, {
-  REACT_DEVELOPER_TOOLS,
-} from 'electron-devtools-installer';
+import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 let mainWindow: BrowserWindow | null;
 
@@ -17,7 +15,9 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     // icon: path.join(assetsPath, 'assets', 'icon.png'),
     width: 1100,
+    minWidth: 1000,
     height: 700,
+    minHeight: 450,
     backgroundColor: '#fff',
     webPreferences: {
       nodeIntegration: false,
@@ -26,11 +26,11 @@ function createWindow() {
     },
   });
 
+  mainWindow.setMenu(null);
+
   console.log(app.getPath('userData'));
 
-  mainWindow.loadURL(
-    `${MAIN_WINDOW_WEBPACK_ENTRY}?saveFilePath=${app.getPath('userData')}`
-  );
+  mainWindow.loadURL(`${MAIN_WINDOW_WEBPACK_ENTRY}?saveFilePath=${app.getPath('userData')}`);
 
   mainWindow.on('closed', () => {
     mainWindow = null;

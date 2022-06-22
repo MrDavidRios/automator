@@ -1,11 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Lato&family=Roboto:wght@300;400&display=swap');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '../../../node_modules/bootstrap/scss/functions';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
-//Components
-@import 'components/actionComponent';
+// Modified Bootstrap Variables
+$primary: $accent-color-purple;
 
-//Variables
-@import 'variables';
+// Bootstrap Requirements
+@import '../../../node_modules/bootstrap/scss/functions';
+@import '../../../node_modules/bootstrap/scss/variables';
+@import '../../../node_modules/bootstrap/scss/maps';
+@import '../../../node_modules/bootstrap/scss/mixins';
+@import '../../../node_modules/bootstrap/scss/root';
+
+// Bootstrap Options
+@import '../../../node_modules/bootstrap/scss/buttons';
+@import '../../../node_modules/bootstrap/scss/dropdown';
+@import '../../../node_modules/bootstrap/scss/close';
+@import '../../../node_modules/bootstrap/scss/modal';
+@import '../../../node_modules/bootstrap/scss/helpers';
+@import '../../../node_modules/bootstrap/scss/forms';
+
+// Components
+@import 'components/actionComponent';
 
 * {
   font-family: 'Heebo', sans-serif;
@@ -13,7 +34,8 @@
   user-select: none;
 }
 
-p {
+p,
+body {
   margin: 0 !important;
 }
 
@@ -27,6 +49,8 @@ body,
 #root {
   width: 100%;
   height: 100%;
+
+  overflow: hidden;
 }
 
 input[type='file'] {
@@ -38,10 +62,8 @@ input[type='file'] {
   height: 100%;
 
   display: grid;
-  grid-template-rows: 20% 80%;
+  grid-template-rows: 20% 70%;
   grid-template-columns: 100%;
-
-  padding-bottom: 25px;
 
   justify-content: center;
   align-items: center;
@@ -52,7 +74,7 @@ input[type='file'] {
 }
 
 #actionsDisplay {
-  width: 70%;
+  width: 85%;
   height: 80%;
   max-width: 1000px;
   min-width: 450px;
@@ -81,6 +103,11 @@ input[type='file'] {
 
   > div:last-of-type {
     height: 30px;
+  }
+
+  #noActionsText {
+    padding-top: 15px;
+    text-align: center;
   }
 
   #addActionBtn {
@@ -119,10 +146,9 @@ input[type='file'] {
 .dropdown-menu {
   padding: 5px !important;
 
-  background-color: $accent-color-purple;
-
   li a {
     border-radius: 5px;
+    width: auto;
 
     &:active {
       background-color: $accent-color-purple;
@@ -145,4 +171,8 @@ input[type='file'] {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(196, 196, 196);
+}
+
+.form-control {
+  width: auto;
 }

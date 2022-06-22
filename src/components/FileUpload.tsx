@@ -4,26 +4,39 @@ import { getFileExtension, getFilename } from '../utils/fileops';
 import { Modal } from 'bootstrap';
 
 const FileUpload = ({ action, type, idx, updateAction, modifyAction }: { action: Action; type: string; idx: number; updateAction: Function; modifyAction: Function }) => {
-  const filename = type === 'operation' ? getFilename(action.operationFilePath) : action.eventAppProcessName;
-  const fileExtension = getFileExtension(filename);
+  let filename = type === 'operation' ? getFilename(action.operationFilePath) : action.eventAppProcessName;
+  let fileExtension = getFileExtension(filename);
 
   const requiresExe = type === 'event' || action.operation === OperationType.OpenApp;
 
   return (
     <div className="file-upload">
+      <button
+        type="button"
+        className="btn btn-outline-primary"
+        onClick={e => {
+          ((e.target as HTMLElement).nextElementSibling as HTMLElement).click();
+        }}
+      >
+        {`Select ${requiresExe ? 'App' : 'File'}`}
+      </button>
       <input
         type="file"
+        className="visually-hidden"
         accept={requiresExe ? '.exe, .js' : '*'}
         onChange={el => {
-          if (requiresExe && fileExtension !== 'exe') {
-            console.log(el.target.files![0].path);
+          try {
+            filename = getFilename(el.target.files![0].path);
+            fileExtension = getFileExtension(el.target.files![0].path);
+          } catch {}
 
+          if (requiresExe && fileExtension !== 'exe') {
             const rejectedExtensionModal = new Modal(document.getElementById('rejectedExtensionModal') as Element);
             rejectedExtensionModal.toggle();
           } else {
             const updatedAction = {
               ...action,
-              eventAppProcessName: type === 'event' ? getFilename(el.target.files![0].path) : action.eventAppProcessName,
+              eventAppProcessName: type === 'event' ? filename : action.eventAppProcessName,
               operationFilePath: type === 'operation' ? el.target.files![0].path : action.operationFilePath,
             };
 
@@ -32,15 +45,16 @@ const FileUpload = ({ action, type, idx, updateAction, modifyAction }: { action:
           }
         }}
       />
-      <p title={filename}>{filename}</p>
+      <p title={filename}>{filename ?? `No ${requiresExe ? 'app' : 'file'} chosen`}</p>
 
+      {/* Modal Window */}
       <div className="modal fade" id="rejectedExtensionModal" tabIndex={-1} role="dialog" aria-labelledby="rejectedExtensionModalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="rejectedExtensionModalLabel">
+              <h3 className="modal-title" id="rejectedExtensionModalLabel">
                 Error - Invalid File Type
-              </h5>
+              </h3>
               <button
                 type="button"
                 className="btn-close"
