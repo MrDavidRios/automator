@@ -1,7 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const Dropdown = ({ options }: { options: string[] }) => {
-  const [selectedOption, setSelectedOption] = useState(0);
+const Dropdown = ({
+  options,
+  selected = 0,
+  type,
+  callback,
+}: {
+  options: string[];
+  selected: number;
+  type: string;
+  callback: Function;
+}) => {
+  const [selectedOption, setSelectedOption] = useState(selected);
+
+  let stateFinished = false;
+
+  useEffect(() => {
+    stateFinished = true;
+  });
+
+  function updateSelectedOption(idx: number) {
+    setSelectedOption(idx);
+    callback(type, idx);
+  }
 
   return (
     <div className="dropdown">
@@ -12,14 +33,15 @@ const Dropdown = ({ options }: { options: string[] }) => {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        {options[selectedOption]}
+        {stateFinished ? options[selectedOption] : options[selected]}
       </button>
       <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         {options.map((option, idx) => (
-          <li>
+          <li key={idx}>
             <a
-              onClick={() => setSelectedOption(idx)}
+              onClick={() => updateSelectedOption(idx)}
               className="dropdown-item"
+              draggable="false"
               href="#"
             >
               {option}

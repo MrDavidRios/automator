@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Lato&family=Roboto:wght@300;400&display=swap');
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 
 //Components
 @import 'components/actionComponent';
@@ -8,6 +9,12 @@
 
 * {
   font-family: 'Heebo', sans-serif;
+
+  user-select: none;
+}
+
+p {
+  margin: 0 !important;
 }
 
 // Not really sure why this should be necessary...
@@ -15,13 +22,97 @@ head {
   display: none;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 #mainWrapper {
-  display: flex;
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-rows: 20% 80%;
+  grid-template-columns: 100%;
+
+  padding-bottom: 25px;
+
   justify-content: center;
+  align-items: center;
+
+  > * {
+    margin: auto;
+  }
+}
+
+#actionsDisplay {
+  width: 70%;
+  height: 80%;
+  max-width: 1000px;
+  min-width: 450px;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  background-color: $foreground-color;
+
+  border-radius: 20px;
+  padding: 20px;
+
+  > div:first-of-type {
+    overflow-y: auto;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  > div:last-of-type {
+    height: 30px;
+  }
+
+  #addActionBtn {
+    border-radius: 100%;
+    width: 72px;
+    height: 72px;
+    background-color: rgb(98, 196, 98);
+
+    position: absolute;
+    left: 50%;
+    bottom: -36px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: none;
+
+    cursor: pointer;
+
+    i {
+      filter: $white-filter;
+      font-size: 72px;
+      margin-top: 8px;
+    }
+
+    &:active {
+      box-shadow: none !important;
+      bottom: -38px;
+    }
+  }
 }
 
 .dropdown-menu {
   padding: 5px !important;
+
+  background-color: $accent-color-purple;
 
   li a {
     border-radius: 5px;

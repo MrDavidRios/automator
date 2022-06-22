@@ -1,22 +1,95 @@
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Lato&family=Roboto:wght@300;400&display=swap");
+@import url(bootstrap-icons/font/bootstrap-icons.css);
 .action {
-  display: flex; }
+  height: min-content;
+  width: 100%;
+  display: grid;
+  grid-template-columns: min-content min-content min-content min-content auto min-content;
+  align-items: center;
+  gap: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 15px; }
+  .action .remove-action-btn {
+    margin-right: 12px; }
+    .action .remove-action-btn .delete {
+      color: #f96c6c; }
+      .action .remove-action-btn .delete:active {
+        background-color: #e6e6e6; }
 
 * {
-  display: flex; }
+  font-family: 'Heebo', sans-serif;
+  user-select: none; }
 
-* {
-  font-family: 'Heebo', sans-serif; }
+p {
+  margin: 0 !important; }
 
 head {
   display: none; }
 
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%; }
+
 #mainWrapper {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 20% 80%;
+  grid-template-columns: 100%;
+  padding-bottom: 25px;
+  justify-content: center;
+  align-items: center; }
+  #mainWrapper > * {
+    margin: auto; }
+
+#actionsDisplay {
+  width: 70%;
+  height: 80%;
+  max-width: 1000px;
+  min-width: 450px;
   display: flex;
-  justify-content: center; }
+  flex-direction: column;
+  position: relative;
+  background-color: #e6e6e6;
+  border-radius: 20px;
+  padding: 20px; }
+  #actionsDisplay > div:first-of-type {
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; }
+  #actionsDisplay > div:last-of-type {
+    height: 30px; }
+  #actionsDisplay #addActionBtn {
+    border-radius: 100%;
+    width: 72px;
+    height: 72px;
+    background-color: #62c462;
+    position: absolute;
+    left: 50%;
+    bottom: -36px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: none;
+    cursor: pointer; }
+    #actionsDisplay #addActionBtn i {
+      filter: invert(100%) sepia(4%) saturate(17%) hue-rotate(184deg) brightness(107%) contrast(104%);
+      font-size: 72px;
+      margin-top: 8px; }
+    #actionsDisplay #addActionBtn:active {
+      box-shadow: none !important;
+      bottom: -38px; }
 
 .dropdown-menu {
-  padding: 5px !important; }
+  padding: 5px !important;
+  background-color: #a898d7; }
   .dropdown-menu li a {
     border-radius: 5px; }
     .dropdown-menu li a:active {

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-export enum ActionType {
+export enum OperationType {
   OpenApp,
   OpenFile,
   GoToLink,

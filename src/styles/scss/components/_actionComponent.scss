@@ -1,7 +1,27 @@
-.action {
-  display: flex;
-}
+@import '../variables';
 
-* {
-  display: flex;
+.action {
+  height: min-content;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: min-content min-content min-content min-content auto min-content;
+  align-items: center;
+  gap: 10px;
+
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 15px;
+
+  .remove-action-btn {
+    margin-right: 12px;
+
+    .delete {
+      color: #f96c6c;
+
+      &:active {
+        background-color: $foreground-color;
+      }
+    }
+  }
 }
