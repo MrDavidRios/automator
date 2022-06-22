@@ -26,7 +26,11 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  console.log(app.getPath('userData'));
+
+  mainWindow.loadURL(
+    `${MAIN_WINDOW_WEBPACK_ENTRY}?saveFilePath=${app.getPath('userData')}`
+  );
 
   mainWindow.on('closed', () => {
     mainWindow = null;

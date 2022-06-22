@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Action } from './Action';
 import { EventType, OperationType } from './ActionTypes';
 import ActionsDisplay from './components/ActionsDisplay';
+import { loadActions, saveActions } from './saveData';
 
 export function App() {
+  const loadedActions = loadActions();
+
   window.Main.initShell(handleOutput, 10000);
 
   function handleOutput(output: any) {}
 
-  const [actions, setActions] = useState([
-    new Action(EventType.OnStartup, OperationType.GoToLink),
-  ]);
+  const [actions, setActions] = useState(loadedActions);
 
   function modifyAction(action: Action, idx: number) {
     const newArr = [...actions];
@@ -28,6 +29,10 @@ export function App() {
   function deleteAction(actionIdx: number) {
     setActions(actions.filter((action, idx) => idx !== actionIdx));
   }
+
+  useEffect(() => {
+    saveActions(actions);
+  });
 
   return (
     <div id="mainWrapper">

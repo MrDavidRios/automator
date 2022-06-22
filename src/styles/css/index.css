@@ -10,6 +10,9 @@
   background-color: #fff;
   padding: 10px 10px 10px 15px;
   border-radius: 15px; }
+  .action i {
+    filter: invert(64%) sepia(0%) saturate(0%) hue-rotate(32deg) brightness(89%) contrast(90%);
+    height: 30px; }
   .action .remove-action-btn {
     margin-right: 12px; }
     .action .remove-action-btn .delete {
@@ -60,7 +63,7 @@ body,
   #actionsDisplay > div:first-of-type {
     overflow-y: auto;
     height: 100%;
-    padding-right: 8px;
+    padding: 0 8px 10px 0;
     display: flex;
     flex-direction: column;
     gap: 10px; }
