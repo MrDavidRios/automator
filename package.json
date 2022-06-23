@@ -16,6 +16,7 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
+    "auto-launch": "^5.0.5",
     "bootstrap": "^5.2.0-beta1",
     "bootstrap-icons": "^1.8.3",
     "node-sass": "^7.0.1",

@@ -2,8 +2,6 @@ import { Action } from '../Action';
 import { ActionElement } from './ActionElement';
 
 const ActionsDisplay = ({ actions, addAction, deleteAction, modifyAction }: { actions: Action[]; addAction: Function; deleteAction: Function; modifyAction: Function }) => {
-  console.log(actions);
-
   return (
     <div id="actionsDisplay" draggable="false" className="shadow">
       <div>

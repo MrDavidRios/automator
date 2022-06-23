@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Action } from './Action';
 import { EventType, OperationType } from './ActionTypes';
 import ActionsDisplay from './components/ActionsDisplay';
+import { StartupToggle } from './components/StartupToggle';
+import { triggerOperations } from './performOperations';
 import { loadActions, saveActions } from './saveData';
 
 export function App() {
@@ -9,9 +11,12 @@ export function App() {
 
   window.Main.initShell(handleOutput, 10000);
 
+  // triggerOperations(loadedActions, EventType.OnStartup);
+
   function handleOutput(output: any) {}
 
   const [actions, setActions] = useState(loadedActions);
+  const [autoStartup, setAutoStartup] = useState(window.Main.autoStartupStatus());
 
   function modifyAction(action: Action, idx: number) {
     const newArr = [...actions];
@@ -20,7 +25,7 @@ export function App() {
   }
 
   function addAction() {
-    setActions([...actions, new Action(EventType.OnStartup, OperationType.GoToLink)]);
+    setActions([...actions, new Action(EventType.OnAppOpen, OperationType.GoToLink)]);
   }
 
   function deleteAction(actionIdx: number) {
@@ -35,6 +40,7 @@ export function App() {
     <div id="mainWrapper">
       <header>
         <h1>Automator</h1>
+        <StartupToggle enabled={autoStartup} callback={setAutoStartup} />
       </header>
 
       <ActionsDisplay actions={actions} addAction={addAction} deleteAction={deleteAction} modifyAction={modifyAction} />

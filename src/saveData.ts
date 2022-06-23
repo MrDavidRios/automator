@@ -9,7 +9,6 @@ export function saveActions(actions: Action[]) {
   const path = getSaveFilePath('actions.json');
 
   try {
-    console.log('Saving: ', JSON.parse(JSON.stringify(actions)));
     window.Main.writeFile(path, JSON.stringify(actions));
   } catch (err) {
     console.error(err);

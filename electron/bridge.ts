@@ -31,6 +31,18 @@ export const api = {
     fs.writeFileSync(filePath, JSON.stringify(data));
   },
 
+  openLink: (url: string) => {
+    require('electron').shell.openExternal(url);
+  },
+
+  toggleAutoStartup(enabled: boolean) {
+    ipcRenderer.invoke('toggle-auto-startup', enabled);
+  },
+
+  autoStartupStatus(): boolean {
+    return ipcRenderer.sendSync('auto-startup-status');
+  },
+
   /**
    * Provide an easier way to listen to events
    */

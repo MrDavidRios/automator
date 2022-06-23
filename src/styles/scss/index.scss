@@ -53,6 +53,10 @@ body,
   overflow: hidden;
 }
 
+header {
+  text-align: center;
+}
+
 input[type='file'] {
   color: transparent;
 }
@@ -175,4 +179,10 @@ input[type='file'] {
 
 .form-control {
   width: auto;
+}
+
+#autoStartupCheckboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

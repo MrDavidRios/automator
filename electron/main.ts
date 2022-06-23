@@ -1,5 +1,32 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+const fs = require('fs');
+
+const SETTINGS_PATH = app.getPath('userData') + '\\userSettings.json';
+
+const AutoLaunch = require('auto-launch');
+
+let autoLaunchEnabled = true;
+
+if (fs.existsSync(SETTINGS_PATH)) {
+  const settings = fs.readFileSync(SETTINGS_PATH, 'utf8') ?? undefined;
+
+  const parsedSettings: { autoStartup: boolean } = JSON.parse(JSON.parse(settings));
+
+  autoLaunchEnabled = parsedSettings.autoStartup;
+}
+
+const autoLaunch = new AutoLaunch({
+  name: 'automator',
+  path: app.getPath('exe'),
+  isHidden: true,
+});
+
+autoLaunch.isEnabled().then((isEnabled: boolean) => {
+  if (!isEnabled && autoLaunchEnabled) {
+    autoLaunch.enable();
+  }
+});
 
 let mainWindow: BrowserWindow | null;
 
@@ -26,9 +53,9 @@ function createWindow() {
     },
   });
 
-  mainWindow.setMenu(null);
+  mainWindow.webContents.openDevTools();
 
-  console.log(app.getPath('userData'));
+  mainWindow.setMenu(null);
 
   mainWindow.loadURL(`${MAIN_WINDOW_WEBPACK_ENTRY}?saveFilePath=${app.getPath('userData')}`);
 
@@ -69,3 +96,33 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+ipcMain.handle('toggle-auto-startup', async (e, enable) => {
+  autoLaunch.isEnabled().then((isEnabled: boolean) => {
+    if (enable) {
+      if (!isEnabled) {
+        autoLaunch.enable();
+
+        updateSettings({ autoStartup: true });
+
+        autoLaunchEnabled = true;
+      }
+    } else {
+      if (isEnabled) {
+        autoLaunch.disable();
+
+        updateSettings({ autoStartup: false });
+
+        autoLaunchEnabled = false;
+      }
+    }
+  });
+});
+
+ipcMain.on('auto-startup-status', e => {
+  e.returnValue = autoLaunchEnabled;
+});
+
+function updateSettings(updatedSettings: { autoStartup: boolean }) {
+  fs.writeFileSync(SETTINGS_PATH, JSON.stringify(updatedSettings));
+}
