@@ -9,7 +9,6 @@ const events = [
   { text: 'Startup', enabled: false },
   { text: 'App Open', enabled: true },
   { text: 'App Close', enabled: true },
-  { text: 'App Focus', enabled: true },
 ];
 const actions = [
   { text: 'Open App', enabled: true },
@@ -47,7 +46,7 @@ export const ActionElement = ({ idx, action, deleteAction, modifyAction }: { idx
     <div className="action shadow-sm">
       <p>On</p>
       <Dropdown options={JSON.stringify(events)} selected={correctedAction.event} type="event" callback={dropdownChanged} />
-      {correctedAction.event === EventType.OnAppOpen || correctedAction.event === EventType.OnAppClose || correctedAction.event === EventType.OnAppFocus ? (
+      {correctedAction.event === EventType.OnAppOpen || correctedAction.event === EventType.OnAppClose ? (
         <FileUpload action={correctedAction} type="event" idx={idx} updateAction={updateAction} modifyAction={modifyAction} />
       ) : null}
 
@@ -79,5 +78,5 @@ export const ActionElement = ({ idx, action, deleteAction, modifyAction }: { idx
 };
 
 function appRelatedEvent(event: EventType): boolean {
-  return event === EventType.OnAppClose || event === EventType.OnAppOpen || event === EventType.OnAppFocus;
+  return event === EventType.OnAppClose || event === EventType.OnAppOpen;
 }

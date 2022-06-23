@@ -10,5 +10,4 @@ export enum EventType {
   OnStartup,
   OnAppOpen,
   OnAppClose,
-  OnAppFocus,
 }

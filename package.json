@@ -1,8 +1,8 @@
 {
   "name": "automator",
   "author": "David Rios <mr.daverios@gmail.com>",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "Helps make your routine faster.",
   "main": "./.webpack/main/index.js",
   "scripts": {
     "start": "electron-forge start",
