@@ -32,9 +32,9 @@ export const ActionElement = ({ idx, action, deleteAction, modifyAction }: { idx
 
       _action.operationFilePath = undefined;
     } else if (type === 'event') {
-      _action.event = val;
+      if (!(appRelatedEvent(_action.event) && appRelatedEvent(val))) _action.eventAppProcessName = undefined;
 
-      _action.eventAppProcessName = undefined;
+      _action.event = val;
     }
 
     updateAction(_action);
@@ -63,6 +63,7 @@ export const ActionElement = ({ idx, action, deleteAction, modifyAction }: { idx
             id="urlInput"
             aria-describedby="emailHelp"
             placeholder="http://website.com"
+            value={correctedAction.operationLink}
             onChange={e => {
               const modifiedAction: Action = { ...action, operationLink: e.target.value };
 
@@ -76,3 +77,7 @@ export const ActionElement = ({ idx, action, deleteAction, modifyAction }: { idx
     </div>
   );
 };
+
+function appRelatedEvent(event: EventType): boolean {
+  return event === EventType.OnAppClose || event === EventType.OnAppOpen || event === EventType.OnAppFocus;
+}

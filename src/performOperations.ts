@@ -2,9 +2,15 @@ import { Action } from './Action';
 import { EventType, OperationType } from './ActionTypes';
 
 export function performOperation(action: Action) {
+  console.log(action);
+
   switch (action.operation) {
     case OperationType.GoToLink:
-      if (action.operationLink !== undefined) window.Main.openLink(action.operationLink);
+      if (action.operationLink !== undefined) {
+        const containsHttp = action.operationLink.includes('http://');
+
+        window.Main.openLink(containsHttp ? action.operationLink : 'http://' + action.operationLink);
+      }
       break;
     case OperationType.OpenApp:
       if (action.operationFilePath !== undefined) window.Main.openLink(action.operationFilePath);

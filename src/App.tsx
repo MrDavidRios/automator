@@ -1,19 +1,18 @@
+import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { Action } from './Action';
 import { EventType, OperationType } from './ActionTypes';
 import ActionsDisplay from './components/ActionsDisplay';
 import { StartupToggle } from './components/StartupToggle';
-import { triggerOperations } from './performOperations';
+import { performOperation, triggerOperations } from './performOperations';
 import { loadActions, saveActions } from './saveData';
 
 export function App() {
   const loadedActions = loadActions();
 
-  window.Main.initShell(handleOutput, 10000);
+  const processNames: string[] = loadedActions.map(a => a.eventAppProcessName ?? '').filter(a => a !== '');
 
-  // triggerOperations(loadedActions, EventType.OnStartup);
-
-  function handleOutput(output: any) {}
+  window.Main.initShell(handleOutput, processNames, 2000);
 
   const [actions, setActions] = useState(loadedActions);
   const [autoStartup, setAutoStartup] = useState(window.Main.autoStartupStatus());
@@ -35,6 +34,31 @@ export function App() {
   useEffect(() => {
     saveActions(actions);
   });
+
+  let storedProcesses: string[];
+  function handleOutput(output: any) {
+    if (storedProcesses !== undefined) {
+      console.log(output);
+
+      const closedProcesses = _.difference(storedProcesses, output);
+
+      for (let i = 0; i < closedProcesses.length; i++) {
+        const relevantActions = actions.filter(action => action.eventAppProcessName === closedProcesses[i]);
+
+        triggerOperations(relevantActions, EventType.OnAppClose);
+      }
+
+      const openedProcesses = _.difference(output, storedProcesses);
+
+      for (let i = 0; i < openedProcesses.length; i++) {
+        const relevantActions = actions.filter(action => action.eventAppProcessName === openedProcesses[i]);
+
+        triggerOperations(relevantActions, EventType.OnAppOpen);
+      }
+    }
+
+    storedProcesses = [...output];
+  }
 
   return (
     <div id="mainWrapper">

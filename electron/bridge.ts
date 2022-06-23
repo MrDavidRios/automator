@@ -15,12 +15,12 @@ export const api = {
     ipcRenderer.send('message', message);
   },
 
-  initShell: (callback: Function, interval?: number) => {
-    initShellOnTimer(callback, interval);
+  initShell: (callback: Function, processes: string[], interval?: number) => {
+    initShellOnTimer(callback, processes, interval);
   },
 
-  changeInterval: (callback: Function, interval: number) => {
-    changeTimerInterval(callback, interval);
+  changeInterval: (callback: Function, processes: string[], interval: number) => {
+    changeTimerInterval(callback, processes, interval);
   },
 
   readFile: (filePath: string): any => {
