@@ -1834,6 +1834,14 @@ body,
 
 header {
   text-align: center; }
+  header > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; }
+    header > div i {
+      font-size: 32px;
+      height: 46px; }
 
 input[type='file'] {
   color: transparent; }
@@ -1920,7 +1928,12 @@ input[type='file'] {
 .form-control {
   width: auto; }
 
+.form-switch {
+  padding-left: 0px; }
+  .form-switch .form-check-input {
+    margin: 0; }
+
 #autoStartupCheckboxWrapper {
   display: flex;
   align-items: center;
-  gap: 5px; }
+  gap: 10px; }

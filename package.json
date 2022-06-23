@@ -79,7 +79,7 @@
       "packagerConfig": {
         "name": "Automator",
         "executableName": "automator",
-        "icon": "assets/icon",
+        "icon": "assets/icons/icon",
         "extraResource": [
           "assets"
         ]

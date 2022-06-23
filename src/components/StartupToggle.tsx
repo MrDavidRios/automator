@@ -12,7 +12,7 @@ export const StartupToggle = ({ enabled, callback }: { enabled: boolean; callbac
         }}
       />
       <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
-        Open automator on startup
+        Open on startup
       </label>
     </div>
   );

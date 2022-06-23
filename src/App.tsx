@@ -12,7 +12,7 @@ export function App() {
 
   const processNames: string[] = loadedActions.map(a => a.eventAppProcessName ?? '').filter(a => a !== '');
 
-  window.Main.initShell(handleOutput, processNames, 2000);
+  window.Main.initShell(handleOutput, processNames, 1000);
 
   const [actions, setActions] = useState(loadedActions);
   const [autoStartup, setAutoStartup] = useState(window.Main.autoStartupStatus());
@@ -63,7 +63,10 @@ export function App() {
   return (
     <div id="mainWrapper">
       <header>
-        <h1>Automator</h1>
+        <div>
+          <i className="bi bi-gear"></i>
+          <h1>Automator</h1>
+        </div>
         <StartupToggle enabled={autoStartup} callback={setAutoStartup} />
       </header>
 

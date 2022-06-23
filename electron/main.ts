@@ -44,7 +44,7 @@ function createWindow() {
     width: 1100,
     minWidth: 1000,
     height: 700,
-    minHeight: 450,
+    minHeight: 600,
     backgroundColor: '#fff',
     webPreferences: {
       nodeIntegration: false,
@@ -53,7 +53,7 @@ function createWindow() {
     },
   });
 
-  mainWindow.webContents.openDevTools();
+  if (process.env.NODE_ENV === 'development') mainWindow.webContents.openDevTools();
 
   mainWindow.setMenu(null);
 
