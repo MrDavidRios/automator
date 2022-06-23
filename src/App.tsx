@@ -4,7 +4,7 @@ import { Action } from './Action';
 import { EventType, OperationType } from './ActionTypes';
 import ActionsDisplay from './components/ActionsDisplay';
 import { StartupToggle } from './components/StartupToggle';
-import { performOperation, triggerOperations } from './performOperations';
+import { triggerOperations } from './performOperations';
 import { loadActions, saveActions } from './saveData';
 
 export function App() {

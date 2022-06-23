@@ -11,7 +11,7 @@ let autoLaunchEnabled = true;
 if (fs.existsSync(SETTINGS_PATH)) {
   const settings = fs.readFileSync(SETTINGS_PATH, 'utf8') ?? undefined;
 
-  const parsedSettings: { autoStartup: boolean } = JSON.parse(JSON.parse(settings));
+  const parsedSettings: { autoStartup: boolean } = JSON.parse(settings);
 
   autoLaunchEnabled = parsedSettings.autoStartup;
 }
