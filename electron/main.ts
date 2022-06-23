@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, MenuItem, Tray } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 const fs = require('fs');
 
@@ -6,6 +6,7 @@ const SETTINGS_PATH = app.getPath('userData') + '\\userSettings.json';
 
 const AutoLaunch = require('auto-launch');
 
+let appQuitting = false;
 let autoLaunchEnabled = true;
 
 if (fs.existsSync(SETTINGS_PATH)) {
@@ -55,13 +56,66 @@ function createWindow() {
 
   if (process.env.NODE_ENV === 'development') mainWindow.webContents.openDevTools();
 
-  mainWindow.setMenu(null);
+  const menu = new Menu();
+  menu.append(
+    new MenuItem({
+      label: 'File',
+      submenu: [
+        {
+          role: 'help',
+          accelerator: 'Ctrl+W',
+          click: () => {
+            app.quit();
+          },
+        },
+      ],
+    })
+  );
+
+  Menu.setApplicationMenu(menu);
+  mainWindow.setMenuBarVisibility(false);
 
   mainWindow.loadURL(`${MAIN_WINDOW_WEBPACK_ENTRY}?saveFilePath=${app.getPath('userData')}`);
+
+  app.on('before-quit', () => {
+    appQuitting = true;
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  mainWindow.on('close', evt => {
+    if (!appQuitting) {
+      evt.preventDefault();
+      mainWindow?.hide();
+    }
+  });
+}
+
+function createTray() {
+  const iconPath = process.env.NODE_ENV === 'production' ? '../../../assets/icons/16x16.png' : '../../assets/icons/16x16.png';
+
+  fs.writeFileSync(app.getPath('userData') + '\\path.txt', require('path').join(__dirname, ''));
+
+  const tray = new Tray(require('path').join(__dirname, iconPath));
+
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Quit',
+      type: 'normal',
+      click() {
+        app.quit();
+      },
+      accelerator: 'Ctrl+W',
+    },
+  ]);
+
+  tray.setToolTip('Automator');
+  tray.setContextMenu(contextMenu);
+  tray.setIgnoreDoubleClickEvents(true);
+
+  tray.on('click', () => mainWindow?.show());
 }
 
 async function registerListeners() {
@@ -78,6 +132,7 @@ app
   .whenReady()
   .then(() => {
     registerListeners();
+    createTray();
 
     installExtension(REACT_DEVELOPER_TOOLS)
       .then(name => console.log(`Added Extension:  ${name}`))
