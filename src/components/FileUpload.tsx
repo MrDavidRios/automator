@@ -1,7 +1,7 @@
+import Modal from 'bootstrap/js/dist/modal';
 import { Action } from '../Action';
 import { OperationType } from '../ActionTypes';
 import { getFileExtension, getFilename } from '../utils/fileops';
-import { Modal } from 'bootstrap';
 
 const FileUpload = ({ action, type, idx, updateAction, modifyAction }: { action: Action; type: string; idx: number; updateAction: Function; modifyAction: Function }) => {
   let filename = type === 'operation' ? getFilename(action.operationFilePath) : action.eventAppProcessName;
@@ -31,7 +31,13 @@ const FileUpload = ({ action, type, idx, updateAction, modifyAction }: { action:
           } catch {}
 
           if (requiresExe && fileExtension !== 'exe') {
-            const rejectedExtensionModal = new Modal(document.getElementById('rejectedExtensionModal') as Element);
+            // TODO: include .js in the fileExtension check
+            const modalElement = document.getElementById('rejectedExtensionModal') as Element;
+            console.log('here?');
+
+            el.target.value = '';
+
+            const rejectedExtensionModal = Modal.getOrCreateInstance(modalElement);
             rejectedExtensionModal.toggle();
           } else {
             const updatedAction = {
@@ -61,7 +67,8 @@ const FileUpload = ({ action, type, idx, updateAction, modifyAction }: { action:
                 data-dismiss="modal"
                 aria-label="Close"
                 onClick={() => {
-                  Modal.getInstance(document.getElementById('rejectedExtensionModal') as Element)!.hide();
+                  const modalInstance = Modal.getInstance(document.getElementById('rejectedExtensionModal') as Element)!;
+                  modalInstance.hide();
                 }}
               ></button>
             </div>
@@ -71,7 +78,8 @@ const FileUpload = ({ action, type, idx, updateAction, modifyAction }: { action:
                 type="button"
                 className="btn btn-secondary"
                 onClick={() => {
-                  Modal.getInstance(document.getElementById('rejectedExtensionModal') as Element)!.hide();
+                  const modalInstance = Modal.getInstance(document.getElementById('rejectedExtensionModal') as Element)!;
+                  modalInstance.hide();
                 }}
               >
                 Close

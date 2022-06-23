@@ -3,5 +3,5 @@ export function getFilename(path?: string): string | undefined {
 }
 
 export function getFileExtension(path?: string): string | undefined {
-  return path?.split('.')[1];
+  return getFilename(path)?.split('.')[1];
 }
