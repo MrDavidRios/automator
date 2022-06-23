@@ -7,7 +7,7 @@ export function performOperation(action: Action) {
   switch (action.operation) {
     case OperationType.GoToLink:
       if (action.operationLink !== undefined) {
-        const containsHttp = action.operationLink.includes('http://');
+        const containsHttp = action.operationLink.substring(0, 4) === 'http';
 
         window.Main.openLink(containsHttp ? action.operationLink : 'http://' + action.operationLink);
       }
