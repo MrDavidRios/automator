@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Lato&family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Inter:wght@100;200;300;400&family=Lato&family=Roboto:wght@300;400&display=swap');
 
 // Variables
 @import 'variables';
@@ -25,8 +25,15 @@ $primary: $accent-color-purple;
 @import '../../../node_modules/bootstrap/scss/helpers';
 @import '../../../node_modules/bootstrap/scss/forms';
 
+// Pages
+@import 'pages/mainPage.scss';
+@import 'pages/statEditPage.scss';
+
 // Components
 @import 'components/actionComponent';
+@import 'components/statCard';
+@import 'components/dropdown';
+@import 'components/filterOptionsModal';
 
 * {
   font-family: 'Heebo', sans-serif;
@@ -53,20 +60,29 @@ body,
   overflow: hidden;
 }
 
-header {
-  text-align: center;
+h1,
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
 
-  > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+h1 {
+  font-size: 45px;
+}
 
-    gap: 15px;
+h2 {
+  font-size: 30px;
+}
 
-    i {
-      font-size: 32px;
-      height: 46px;
-    }
+#mainWrapper header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px 0 30px;
+
+  div {
+    margin-top: 10px;
   }
 }
 
@@ -74,105 +90,7 @@ input[type='file'] {
   color: transparent;
 }
 
-#mainWrapper {
-  width: 100%;
-  height: 100%;
-
-  display: grid;
-  grid-template-rows: 20% 70%;
-  grid-template-columns: 100%;
-
-  justify-content: center;
-  align-items: center;
-
-  > * {
-    margin: auto;
-  }
-}
-
-#actionsDisplay {
-  width: 85%;
-  height: 80%;
-  max-width: 1000px;
-  min-width: 450px;
-
-  display: flex;
-  flex-direction: column;
-
-  position: relative;
-
-  background-color: $foreground-color;
-
-  border-radius: 20px;
-  padding: 20px;
-  padding-right: 12px;
-
-  > div:first-of-type {
-    overflow-y: auto;
-    height: 100%;
-
-    padding: 0 8px 10px 0;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  > div:last-of-type {
-    height: 30px;
-  }
-
-  #noActionsText {
-    padding-top: 15px;
-    text-align: center;
-  }
-
-  #addActionBtn {
-    border-radius: 100%;
-    width: 72px;
-    height: 72px;
-    background-color: rgb(98, 196, 98);
-
-    position: absolute;
-    left: 50%;
-    bottom: -36px;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: none;
-
-    cursor: pointer;
-
-    i {
-      filter: $white-filter;
-      font-size: 72px;
-      margin-top: 8px;
-    }
-
-    &:active {
-      box-shadow: none !important;
-      bottom: -38px;
-    }
-  }
-}
-
-.dropdown-menu {
-  padding: 5px !important;
-
-  li a {
-    border-radius: 5px;
-    width: auto;
-
-    &:active {
-      background-color: $accent-color-purple;
-    }
-  }
-}
-
+// Scrollbar
 ::-webkit-scrollbar {
   width: 12px;
 }
@@ -190,20 +108,39 @@ input[type='file'] {
   background: rgb(196, 196, 196);
 }
 
-.form-control {
-  width: auto;
+.horizontally-centered-absolute {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.form-switch {
-  padding-left: 0px;
-
-  .form-check-input {
-    margin: 0;
-  }
+.back-arrow-btn {
+  background: none;
+  border: none;
 }
 
-#autoStartupCheckboxWrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.big-btn {
+  background-color: $accent-color-purple;
+  color: white;
+
+  height: 40px;
+
+  border: none;
+  border-radius: 20px;
+
+  font-size: 20px;
+
+  font-family: 'Roboto', sans-serif;
+
+  cursor: pointer;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.2);
 }

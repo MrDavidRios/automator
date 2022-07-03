@@ -1,8 +1,8 @@
 {
-  "name": "automator",
+  "name": "stat-tracker",
   "author": "David Rios <mr.daverios@gmail.com>",
   "version": "1.0.0",
-  "description": "Helps make your routine faster.",
+  "description": "Keep track of all of your progress in one place!",
   "main": "./.webpack/main/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -24,6 +24,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hot-loader": "4.13.0",
+    "react-router-dom": "^6.3.0",
     "style-loader": "^3.3.1",
     "styled-components": "5.3.0"
   },

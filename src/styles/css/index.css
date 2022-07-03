@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Lato&family=Roboto:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Inter:wght@100;200;300;400&family=Lato&family=Roboto:wght@300;400&display=swap");
 @import url(bootstrap-icons/font/bootstrap-icons.css);
 :root {
   --bs-blue: #0d6efd;
@@ -1781,6 +1781,175 @@ textarea.form-control-lg {
   .input-group .form-select.is-invalid:focus {
     z-index: 3; }
 
+#mainWrapper {
+  background-color: #e6e6e6;
+  display: grid;
+  grid-template-rows: auto auto;
+  height: 100%;
+  text-align: center; }
+
+.form-control {
+  width: auto; }
+
+.form-switch {
+  padding-left: 0px; }
+  .form-switch .form-check-input {
+    margin: 0; }
+
+#autoStartupCheckboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px; }
+
+#statsList {
+  background-color: #e6e6e6;
+  padding: 0 30px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto; }
+
+#addStatButton {
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 300px;
+  filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.25)); }
+  #addStatButton div {
+    margin-top: 3px; }
+    #addStatButton div i {
+      font-size: 24px; }
+
+#statEditPageWrapper header {
+  display: grid;
+  height: 94px;
+  grid-template-columns: 96px calc(100% - (96px * 2));
+  align-items: center;
+  text-align: center;
+  padding: 10px; }
+  #statEditPageWrapper header button {
+    cursor: pointer;
+    border-radius: 10px; }
+    #statEditPageWrapper header button i {
+      filter: invert(64%) sepia(0%) saturate(0%) hue-rotate(32deg) brightness(89%) contrast(90%);
+      font-size: 32px; }
+    #statEditPageWrapper header button:hover {
+      background-color: #e4e4e4; }
+    #statEditPageWrapper header button:active {
+      background-color: #cacaca;
+      margin-top: 2px; }
+  #statEditPageWrapper header > div {
+    width: 100%; }
+    #statEditPageWrapper header > div .input-with-label-outside {
+      width: min-content;
+      margin: auto;
+      position: relative; }
+      #statEditPageWrapper header > div .input-with-label-outside input {
+        height: 40px;
+        width: min-content !important;
+        text-align: center;
+        font-size: 24px;
+        border-radius: 10px; }
+        #statEditPageWrapper header > div .input-with-label-outside input:focus + p {
+          top: -26px; }
+      #statEditPageWrapper header > div .input-with-label-outside p {
+        position: absolute;
+        left: 0;
+        top: -22px;
+        color: #777777;
+        transition: 0.15s ease; }
+
+#statEditPageWrapper main {
+  text-align: center;
+  padding: 0 40px 0 40px; }
+  #statEditPageWrapper main hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0; }
+
+#statNameInput {
+  background-color: #e6e6e6;
+  border: none; }
+
+#addFilterButton {
+  width: 175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: auto;
+  margin-top: 20px; }
+
+#saveEditsButton {
+  width: 200px; }
+
+.input-with-label-below {
+  position: relative; }
+  .input-with-label-below input:focus + p {
+    top: 40px; }
+  .input-with-label-below p {
+    position: absolute;
+    left: 0px;
+    top: 36px;
+    color: #777777;
+    transition: 0.15s ease; }
+
+#statFilterForm {
+  max-height: calc(100vh - 374px);
+  overflow-y: auto; }
+  #statFilterForm > div:last-of-type hr {
+    border-top: 1px solid #fff; }
+
+.filter-template-edit {
+  min-height: 80px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto 2px;
+  align-items: center;
+  justify-content: center;
+  column-gap: 20px; }
+  .filter-template-edit .input-with-label-below {
+    margin-bottom: 20px; }
+  .filter-template-edit button:first-of-type {
+    height: 40px;
+    color: white !important; }
+  .filter-template-edit .remove-filter-proto-btn,
+  .filter-template-edit #optionCard button,
+  .filter-template-edit #filterOptionsModal #closeButton {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 38px;
+    height: 38px;
+    border-radius: 6px; }
+    .filter-template-edit .remove-filter-proto-btn > div,
+    .filter-template-edit #optionCard button > div,
+    .filter-template-edit #filterOptionsModal #closeButton > div {
+      padding-top: 2px; }
+    .filter-template-edit .remove-filter-proto-btn i,
+    .filter-template-edit #optionCard button i,
+    .filter-template-edit #filterOptionsModal #closeButton i {
+      filter: invert(10%) sepia(94%) saturate(4958%) hue-rotate(357deg) brightness(90%) contrast(91%);
+      font-size: 24px;
+      padding-top: 2px; }
+    .filter-template-edit .remove-filter-proto-btn:hover,
+    .filter-template-edit #optionCard button:hover,
+    .filter-template-edit #filterOptionsModal #closeButton:hover {
+      background-color: #e4e4e4; }
+    .filter-template-edit .remove-filter-proto-btn:active,
+    .filter-template-edit #optionCard button:active,
+    .filter-template-edit #filterOptionsModal #closeButton:active {
+      background-color: #cacaca;
+      margin-top: 2px; }
+  .filter-template-edit hr {
+    grid-column: 1 / column2-end; }
+
 .action {
   height: min-content;
   display: flex;
@@ -1814,6 +1983,96 @@ textarea.form-control-lg {
     overflow: hidden;
     white-space: nowrap; }
 
+.stat-card {
+  background-color: #fff;
+  height: 60px;
+  min-height: 60px;
+  display: grid;
+  align-items: center;
+  text-align: left;
+  column-gap: 10px;
+  grid-template-columns: 50px auto 50px;
+  grid-template-rows: 50% 50%;
+  padding: 0 5px 0 5px;
+  border-radius: 10px; }
+  .stat-card .stat-highlights {
+    color: #999999;
+    grid-row: 2; }
+  .stat-card button {
+    grid-row: 1 / row2-end;
+    border: none;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px; }
+  .stat-card .add-button {
+    background-color: #a898d7;
+    padding-top: 3px;
+    cursor: pointer; }
+    .stat-card .add-button i {
+      filter: invert(100%) sepia(4%) saturate(17%) hue-rotate(184deg) brightness(107%) contrast(104%);
+      font-size: 32px;
+      height: 200px; }
+    .stat-card .add-button:hover {
+      background-color: #998bc4; }
+    .stat-card .add-button:active {
+      margin-top: 2px; }
+  .stat-card .edit-button {
+    background: none;
+    grid-column: 3;
+    cursor: pointer; }
+    .stat-card .edit-button i {
+      font-size: 20px;
+      filter: invert(67%) sepia(13%) saturate(12%) hue-rotate(316deg) brightness(87%) contrast(85%); }
+    .stat-card .edit-button:hover {
+      background-color: #e4e4e4; }
+    .stat-card .edit-button:active {
+      background-color: #cacaca;
+      margin-top: 2px; }
+
+.dropdown-menu {
+  padding: 5px !important; }
+  .dropdown-menu li a {
+    border-radius: 5px;
+    width: auto; }
+    .dropdown-menu li a:active {
+      background-color: #a898d7; }
+
+#filterOptionsModal {
+  position: absolute;
+  background: white;
+  width: 400px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: 85px auto 80px;
+  top: 50%;
+  transform: translate(-50%, -50%); }
+  #filterOptionsModal > div:first-of-type button {
+    position: absolute;
+    top: 24px;
+    right: 24px; }
+  #filterOptionsModal > div:last-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px; }
+  #filterOptionsModal #closeButton,
+  #filterOptionsModal #optionCard button {
+    color: black !important; }
+  #filterOptionsModal .input-with-label-below {
+    width: min-content;
+    margin: auto;
+    margin-bottom: 30px; }
+  #filterOptionsModal #optionCard {
+    display: grid;
+    grid-template-columns: auto 60px;
+    justify-content: center;
+    column-gap: 20px;
+    padding-left: 40px; }
+  #filterOptionsModal #optionsWrapper {
+    max-height: calc(90vh - 165px);
+    overflow-y: auto;
+    padding: 10px 0px; }
+
 * {
   font-family: 'Heebo', sans-serif;
   user-select: none; }
@@ -1832,85 +2091,27 @@ body,
   height: 100%;
   overflow: hidden; }
 
-header {
-  text-align: center; }
-  header > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px; }
-    header > div i {
-      font-size: 32px;
-      height: 46px; }
+h1,
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300; }
+
+h1 {
+  font-size: 45px; }
+
+h2 {
+  font-size: 30px; }
+
+#mainWrapper header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px 0 30px; }
+  #mainWrapper header div {
+    margin-top: 10px; }
 
 input[type='file'] {
   color: transparent; }
-
-#mainWrapper {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: 20% 70%;
-  grid-template-columns: 100%;
-  justify-content: center;
-  align-items: center; }
-  #mainWrapper > * {
-    margin: auto; }
-
-#actionsDisplay {
-  width: 85%;
-  height: 80%;
-  max-width: 1000px;
-  min-width: 450px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  background-color: #e6e6e6;
-  border-radius: 20px;
-  padding: 20px;
-  padding-right: 12px; }
-  #actionsDisplay > div:first-of-type {
-    overflow-y: auto;
-    height: 100%;
-    padding: 0 8px 10px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px; }
-  #actionsDisplay > div:last-of-type {
-    height: 30px; }
-  #actionsDisplay #noActionsText {
-    padding-top: 15px;
-    text-align: center; }
-  #actionsDisplay #addActionBtn {
-    border-radius: 100%;
-    width: 72px;
-    height: 72px;
-    background-color: #62c462;
-    position: absolute;
-    left: 50%;
-    bottom: -36px;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: none;
-    cursor: pointer; }
-    #actionsDisplay #addActionBtn i {
-      filter: invert(100%) sepia(4%) saturate(17%) hue-rotate(184deg) brightness(107%) contrast(104%);
-      font-size: 72px;
-      margin-top: 8px; }
-    #actionsDisplay #addActionBtn:active {
-      box-shadow: none !important;
-      bottom: -38px; }
-
-.dropdown-menu {
-  padding: 5px !important; }
-  .dropdown-menu li a {
-    border-radius: 5px;
-    width: auto; }
-    .dropdown-menu li a:active {
-      background-color: #a898d7; }
 
 ::-webkit-scrollbar {
   width: 12px; }
@@ -1925,15 +2126,30 @@ input[type='file'] {
 ::-webkit-scrollbar-thumb:hover {
   background: #c4c4c4; }
 
-.form-control {
-  width: auto; }
+.horizontally-centered-absolute {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); }
 
-.form-switch {
-  padding-left: 0px; }
-  .form-switch .form-check-input {
-    margin: 0; }
+.back-arrow-btn {
+  background: none;
+  border: none; }
 
-#autoStartupCheckboxWrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px; }
+.big-btn {
+  background-color: #a898d7;
+  color: white;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer; }
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.2); }
