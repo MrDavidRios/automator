@@ -1,4 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron';
+import { changeTimerInterval, initShellOnTimer } from '../src/childProcess';
 const fs = require('fs');
 
 export const api = {
@@ -12,6 +13,14 @@ export const api = {
 
   sendMessage: (message: string) => {
     ipcRenderer.send('message', message);
+  },
+
+  initShell: (callback: Function, processes: string[], interval?: number) => {
+    initShellOnTimer(callback, processes, interval);
+  },
+
+  changeInterval: (callback: Function, processes: string[], interval: number) => {
+    changeTimerInterval(callback, processes, interval);
   },
 
   readFile: (filePath: string): any => {

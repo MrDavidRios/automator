@@ -1,22 +1,22 @@
-import { Statistic } from './Statistic';
+import { Action } from './Action';
 
 function getSaveFilePath(filename: string): string {
   const globals = global.location.search;
   return `${globals.substring(globals.indexOf('=') + 1)}\\${filename}`;
 }
 
-export function saveStats(statistics: Statistic[]) {
-  const path = getSaveFilePath('userdata.json');
+export function saveActions(actions: Action[]) {
+  const path = getSaveFilePath('actions.json');
 
   try {
-    window.Main.writeFile(path, JSON.stringify(statistics));
+    window.Main.writeFile(path, JSON.stringify(actions));
   } catch (err) {
     console.error(err);
   }
 }
 
-export function loadStats(): Statistic[] {
-  const path = getSaveFilePath('userdata.json');
+export function loadActions(): Action[] {
+  const path = getSaveFilePath('actions.json');
 
   try {
     const output = window.Main.readFile(path);

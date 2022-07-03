@@ -54,8 +54,6 @@ function createWindow() {
     },
   });
 
-  console.log(process.env.NODE_ENV);
-
   if (process.env.NODE_ENV === 'development') mainWindow.webContents.openDevTools();
 
   const menu = new Menu();

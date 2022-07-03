@@ -6,7 +6,6 @@ export const StartupToggle = ({ enabled, callback }: { enabled: boolean; callbac
         type="checkbox"
         checked={enabled}
         id="flexSwitchCheckDefault"
-        title={enabled ? 'Disable Startup' : 'Enable Startup'}
         onChange={e => {
           window.Main.toggleAutoStartup(e.target.checked);
           callback(e.target.checked);

@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 
-const Dropdown = ({ options, callback, selectedValueIdx = 0, filterTemplate = true }: { options: string; callback: Function; selectedValueIdx?: number; filterTemplate?: boolean }) => {
-  const [selectedOption, setSelectedOption] = useState(selectedValueIdx);
+const Dropdown = ({ options, selected = 0, type, callback }: { options: string; selected: number; type: string; callback: Function }) => {
+  const [selectedOption, setSelectedOption] = useState(selected);
 
-  const optionsArr: string[] = JSON.parse(options);
-
-  if (filterTemplate) optionsArr.unshift('Filter Options');
+  const optionsArr: { text: string; enabled: boolean }[] = JSON.parse(options);
 
   let stateFinished = false;
 
@@ -15,19 +13,19 @@ const Dropdown = ({ options, callback, selectedValueIdx = 0, filterTemplate = tr
 
   function updateSelectedOption(idx: number) {
     setSelectedOption(idx);
-    callback(idx);
+    callback(type, idx);
   }
 
   return (
     <div className="dropdown">
       <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        {stateFinished ? optionsArr[selectedOption] : optionsArr[selectedValueIdx]}
+        {stateFinished ? optionsArr[selectedOption].text : optionsArr[selected].text}
       </button>
       <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         {optionsArr.map((option, idx) => (
           <li key={idx}>
-            <a onClick={() => updateSelectedOption(idx)} className={`dropdown-item ${(filterTemplate && idx > 0) || !filterTemplate ? '' : 'disabled'}`} draggable="false" href="#">
-              {option}
+            <a onClick={() => updateSelectedOption(idx)} className={`dropdown-item ${option.enabled ? '' : 'disabled'}`} draggable="false" href="#">
+              {option.text}
             </a>
           </li>
         ))}

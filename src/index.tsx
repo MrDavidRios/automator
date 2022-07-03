@@ -3,15 +3,5 @@ import { App } from './App';
 import 'bootstrap';
 
 import './styles/css/index.css';
-import { HashRouter, Route, Routes } from 'react-router-dom';
-import { StatEditPage } from './StatEditPage';
 
-ReactDOM.render(
-  <HashRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/StatEditPage" element={<StatEditPage />} />
-    </Routes>
-  </HashRouter>,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'));

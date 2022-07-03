@@ -1,52 +1,76 @@
-import { useEffect, useState } from 'react';
-import { Statistic } from './components/Statistic';
-import { StartupToggle } from './components/StartupToggle';
-import { loadStats, saveStats } from './components/saveData';
-import { StatsList } from './StatsList';
-import { AddStatButton } from './components/AddStatButton';
-import { useLocation } from 'react-router-dom';
 import _ from 'lodash';
+import { useEffect, useState } from 'react';
+import { Action } from './Action';
+import { EventType, OperationType } from './ActionTypes';
+import ActionsDisplay from './components/ActionsDisplay';
+import { StartupToggle } from './components/StartupToggle';
+import { triggerOperations } from './performOperations';
+import { loadActions, saveActions } from './saveData';
 
-export function App(this: any) {
-  const loadedStats = loadStats();
+export function App() {
+  const loadedActions = loadActions();
 
-  const location = useLocation();
+  const processNames: string[] = loadedActions.map(a => a.eventAppProcessName ?? '').filter(a => a !== '');
 
-  const [statistics, setStatistics] = useState(loadedStats);
+  window.Main.initShell(handleOutput, processNames, 1000);
 
+  const [actions, setActions] = useState(loadedActions);
   const [autoStartup, setAutoStartup] = useState(window.Main.autoStartupStatus());
 
-  if ((location as any).state?.modifiedStat !== undefined) {
-    const modifiedStat = (location.state as { modifiedStat: { stat: Statistic; idx: number } }).modifiedStat;
-
-    const newArr = [...statistics];
-    newArr[modifiedStat.idx] = modifiedStat.stat;
-
-    if (!_.isEqual(statistics, newArr)) setStatistics(newArr);
+  function modifyAction(action: Action, idx: number) {
+    const newArr = [...actions];
+    newArr[idx] = action;
+    setActions(newArr);
   }
 
-  function addEntry(statistic: Statistic, idx: number) {
-    const newArr = [...statistics];
-    newArr[idx] = statistic;
-    setStatistics(newArr);
+  function addAction() {
+    setActions([...actions, new Action(EventType.OnAppOpen, OperationType.GoToLink)]);
   }
 
-  function deleteStatistic(statisticIdx: number) {
-    setStatistics(statistics.filter((_statistic, idx) => idx !== statisticIdx));
+  function deleteAction(actionIdx: number) {
+    setActions(actions.filter((_action, idx) => idx !== actionIdx));
   }
 
   useEffect(() => {
-    saveStats(statistics);
+    saveActions(actions);
   });
+
+  let storedProcesses: string[];
+  function handleOutput(output: any) {
+    if (storedProcesses !== undefined) {
+      console.log(output);
+
+      const closedProcesses = _.difference(storedProcesses, output);
+
+      for (let i = 0; i < closedProcesses.length; i++) {
+        const relevantActions = actions.filter(action => action.eventAppProcessName === closedProcesses[i]);
+
+        triggerOperations(relevantActions, EventType.OnAppClose);
+      }
+
+      const openedProcesses = _.difference(output, storedProcesses);
+
+      for (let i = 0; i < openedProcesses.length; i++) {
+        const relevantActions = actions.filter(action => action.eventAppProcessName === openedProcesses[i]);
+
+        triggerOperations(relevantActions, EventType.OnAppOpen);
+      }
+    }
+
+    storedProcesses = [...output];
+  }
 
   return (
     <div id="mainWrapper">
       <header>
-        <h1>Your Stats</h1>
+        <div>
+          <i className="bi bi-gear"></i>
+          <h1>Automator</h1>
+        </div>
         <StartupToggle enabled={autoStartup} callback={setAutoStartup} />
       </header>
-      <StatsList statistics={statistics} />
-      <AddStatButton />
+
+      <ActionsDisplay actions={actions} addAction={addAction} deleteAction={deleteAction} modifyAction={modifyAction} />
     </div>
   );
 }
